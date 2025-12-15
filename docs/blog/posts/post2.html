@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AxelBase – Crypto Mining Calculator</title>
+    <link rel="icon" href="../../AxelLab-Logo.ico" />
+    <meta name="description" content="Simple client-side cryptocurrency mining profitability calculator." />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    
+		<link href="../../_app/immutable/assets/0.xaenTGJY.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/6.BdgQ_nSX.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.Bg6Bm8KQ.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/iTizNYoG.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/8E59LfPz.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DAI1gxH7.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CoqUBzn0.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.L4GwEudf.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Csl_I-_n.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CkGUBAGG.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DS2rmpbp.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.I0GH4R5w.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Dm5cI42v.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/15fjxHzG.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CUGK56su.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DNIzyZx2.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bxz37NkV.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/6.w1FaU9-9.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CX5xXL23.js"><!--1apmzc4--><meta name="description" content="Explore the core mathematical formula behind Proof-of-Work mining and how hash rate, network difficulty, and block rewards determine expected revenue."/> <meta property="og:title" content="Understanding Proof-of-Work Mining Mathematics | Blog"/> <meta property="og:description" content="Explore the core mathematical formula behind Proof-of-Work mining and how hash rate, network difficulty, and block rewards determine expected revenue."/> <meta property="og:url" content="../../blog/posts/post2"/> <meta property="og:type" content="article"/> <meta name="twitter:card" content="summary_large_image"/><!----><title>Understanding Proof-of-Work Mining Mathematics | Blog</title>
+    
+    <style>
+      /* Enforce font here in case CSS loads late */
+      body { font-family: 'Quicksand', sans-serif !important; }
+    </style>
+  </head>
+  <body data-bs-theme="light">
+    <div class="d-flex flex-column">
+      <!--[--><!--[--><!----><header class="custom-navbar svelte-12qhfyh"><div class="container d-flex align-items-center justify-content-between h-100"><div class="d-flex align-items-center gap-4"><a href="../../" class="d-flex align-items-center text-decoration-none group svelte-12qhfyh"><img src="../../AxelLab-Logo.ico" alt="AxelLab Logo" class="brand-logo svelte-12qhfyh"/> <span class="brand-text ms-2 svelte-12qhfyh">AxelBase</span></a> <div class="position-relative"><button class="bmac-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z"></path></svg> <span class="d-none d-md-inline">Buy me a coffee</span></button> <!--[!--><!--]--></div></div> <nav class="d-none d-lg-block"><ul class="nav-menu m-0 p-0 d-flex gap-4 svelte-12qhfyh"><li><a href="../../" class="nav-link-custom svelte-12qhfyh">Home</a></li> <li><a href="../../#about" class="nav-link-custom svelte-12qhfyh">About</a></li> <li><a href="../../#how-to" class="nav-link-custom svelte-12qhfyh">How to use</a></li> <li><a href="../../#faq" class="nav-link-custom svelte-12qhfyh">FAQ</a></li> <li><a href="../../blog" class="nav-link-custom svelte-12qhfyh">Blog</a></li></ul></nav> <button class="d-lg-none btn btn-link text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-label="Toggle Mobile Menu"><i class="bi bi-list fs-1" style="color: #AEA04B;"></i></button></div> <div class="collapse d-lg-none bg-white border-bottom" id="mobileNav"><div class="container py-3"><ul class="list-unstyled d-flex flex-column gap-3 text-center mb-0"><li><a href="../../" class="nav-link-custom svelte-12qhfyh">Home</a></li> <li><a href="../../#about" class="nav-link-custom svelte-12qhfyh">About</a></li> <li><a href="../../#how-to" class="nav-link-custom svelte-12qhfyh">How to use</a></li> <li><a href="../../#faq" class="nav-link-custom svelte-12qhfyh">FAQ</a></li> <li><a href="../../blog" class="nav-link-custom svelte-12qhfyh">Blog</a></li></ul></div></div></header> <main><!--[--><!----><div class="container fade-in post-layout svelte-1apmzc4"><div class="breadcrumbs svelte-1apmzc4"><a href="../../blog" class="svelte-1apmzc4">Blog</a> <span>/</span> <p class="svelte-1apmzc4">Understanding Proof-of-Work Mining Mathematics</p></div> <article class="prose svelte-1apmzc4"><h1 class="svelte-1apmzc4">Understanding Proof-of-Work Mining Mathematics</h1> <p class="post-meta svelte-1apmzc4">Published: December 15, 2025</p> <p class="svelte-1apmzc4">Proof-of-Work mining relies on a probabilistic mathematical model that rewards miners proportionally to their contributed hashing power. The core idea is simple: the more hashes you compute per second relative to the entire network, the higher your expected share of block rewards.</p> <p class="svelte-1apmzc4">This relationship forms the foundation of all mining profitability calculations. The calculator uses this exact principle to estimate revenue before subtracting operational costs.</p> <h2 class="svelte-1apmzc4">The Fundamental Formula</h2> <p class="svelte-1apmzc4">Your mining rig generates a certain number of hashes per second. The network as a whole has a total hash rate derived from its difficulty setting. Your fraction of the total network hash rate determines how often you are statistically likely to solve a block.</p> <p class="svelte-1apmzc4">In practice, the expected blocks solved per second equals your hash rate divided by the network difficulty (adjusted for units). Multiplying this by the block reward gives coins earned per second, which can then be scaled to daily revenue when multiplied by the coin price.</p> <h2 class="svelte-1apmzc4">Breaking Down the Components</h2> <p class="svelte-1apmzc4">Hash rate measures hardware performance in millions of hashes per second. Higher values directly increase expected rewards. Network difficulty adjusts roughly every two weeks in many chains to maintain consistent block times. Rising difficulty reduces individual earnings unless offset by hardware upgrades.</p> <p class="svelte-1apmzc4">Block reward is the fixed amount of new coins plus transaction fees awarded per block. Halving events periodically reduce this reward, impacting long-term profitability.</p> <h2 class="svelte-1apmzc4">From Probability to Daily Revenue</h2> <p class="svelte-1apmzc4">The calculator converts your hash rate to hashes per second, divides by difficulty converted to total hashes, multiplies by block reward to get coins per second, then scales to 86,400 seconds in a day. The final daily revenue in USD is this coin amount times the current market price.</p> <p class="svelte-1apmzc4">This probabilistic approach means actual results fluctuate around the expected value, but over longer periods, earnings converge toward the calculated average.</p> <h2 class="svelte-1apmzc4">FAQ</h2> <details class="svelte-1apmzc4"><summary class="svelte-1apmzc4">Why is difficulty measured in petahashes?</summary> <p class="svelte-1apmzc4">Modern networks operate at extremely high total hash rates, making petahashes a practical unit for expressing difficulty.</p></details> <details class="svelte-1apmzc4"><summary class="svelte-1apmzc4">Does luck affect short-term results?</summary> <p class="svelte-1apmzc4">Yes. Solving blocks is random, so daily earnings can vary significantly from the calculated expectation.</p></details> <details class="svelte-1apmzc4"><summary class="svelte-1apmzc4">How accurate is the revenue estimate?</summary> <p class="svelte-1apmzc4">Very accurate as a long-term average when inputs reflect current network conditions.</p></details> <p class="italic-note svelte-1apmzc4">Mastering these relationships helps miners make informed decisions about hardware and operational strategy.</p></article></div><!----><!--]--></main> <footer class="fixed-footer text-center"><div class="container d-flex flex-column flex-md-row justify-content-between align-items-center"><small class="text-muted mb-2 mb-md-0">© 2025 AxelBase Crypto Mining Calculator</small> <div><a href="../../privacy" class="footer-link">Privacy</a> <span class="text-muted">•</span> <a href="../../terms" class="footer-link">Terms</a></div></div></footer><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1wqiyf0 = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						assets: "/crypto-mining-calculator"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.Bg6Bm8KQ.js"),
+						import("../../_app/immutable/entry/app.L4GwEudf.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 6],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
