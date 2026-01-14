@@ -3,10 +3,10 @@
   import { fly } from 'svelte/transition';
   import "../app.css";
 
-  // --- Buy Me a Coffee Logic ---
-  const paypalUsername = 'AxelLab427'; // <--- CHANGE THIS
-  const donationAmounts = [1, 3, 5, 10];
+  // --- Support Logic ---
   let isDropdownOpen = false;
+  const bmacLink = "https://buymeacoffee.com/axelbase";
+  const bitcoinLink = "bitcoin:bc1q3p0e6vt492m4w4fpz5m2cl4zcfuqqkgaj6myc9?label=AxelBase&message=Buy%20me%20a%20coffee";
 
   function toggleDropdown() {
     isDropdownOpen = !isDropdownOpen;
@@ -42,25 +42,36 @@
       </a>
 
       <div class="position-relative" use:clickOutside on:click_outside={closeDropdown}>
-        <button class="bmac-button" on:click={toggleDropdown}>
+        <button 
+          class="bmac-button" 
+          on:click={toggleDropdown}
+          aria-label="Support options"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z" />
+            <path d="M2,21V19H20V21H2M20,8V5H4V8H20M20,10H4V13C4,14.38 4.5,15.63 5.31,16.58L11.64,19H12.36L18.69,16.58C19.5,15.63 20,14.38 20,13V10M16,2H8V4H16V2Z" />
           </svg>
           <span class="d-none d-md-inline">Buy me a coffee</span>
         </button>
 
         {#if isDropdownOpen}
-          <div class="bmac-dropdown" transition:fly={{ y: 10, duration: 250 }}>
-            {#each donationAmounts as amount}
-              <a 
-                href="https://paypal.me/{paypalUsername}/{amount}" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                on:click={closeDropdown}
-              >
-                ${amount}
-              </a>
-            {/each}
+          <div class="bmac-dropdown" transition:fly={{ y: -10, duration: 250 }}>
+            <a href={bmacLink} target="_blank" rel="noopener" on:click={closeDropdown}>
+              <span class="amount">$3</span> One Coffee
+            </a>
+            <a href={bmacLink} target="_blank" rel="noopener" on:click={closeDropdown}>
+              <span class="amount">$5</span> Two Coffees
+            </a>
+            <a href={bmacLink} target="_blank" rel="noopener" on:click={closeDropdown}>
+              <span class="amount">$10</span> Three Coffees
+            </a>
+
+            <a href={bmacLink} target="_blank" rel="noopener" on:click={closeDropdown} class="custom-amount-link">
+              Custom Amount
+            </a>
+
+            <a href={bitcoinLink} on:click={closeDropdown} class="custom-amount-link bitcoin-link">
+              Buy via Crypto (Bitcoin)
+            </a>
           </div>
         {/if}
       </div>
@@ -79,11 +90,11 @@
     <button 
         class="d-lg-none btn btn-link text-dark" 
         type="button" 
-        data-bs-toggle="collapse" 
+        data-bs-toggle="collapse"
         data-bs-target="#mobileNav"
         aria-label="Toggle Mobile Menu"
     >
-      <i class="bi bi-list fs-1" style="color: #AEA04B;"></i>
+      <i class="bi bi-list fs-1" style="color: var(--primary-ochre);"></i>
     </button>
   </div>
   
@@ -116,7 +127,6 @@
 </footer>
 
 <style>
-  /* Local Scoped Styles for Layout structure */
   .custom-navbar {
     position: fixed;
     top: 0;
@@ -143,7 +153,7 @@
   .brand-text {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #AEA04B;
+    color: var(--primary-ochre);
     letter-spacing: -0.5px;
   }
 
@@ -157,6 +167,7 @@
     font-size: 1.05rem;
     position: relative;
     padding: 5px 0;
+    text-decoration: none;
   }
 
   .nav-link-custom::after {
@@ -166,16 +177,69 @@
     height: 3px;
     bottom: 0;
     left: 0;
-    background-color: #AEA04B;
+    background-color: var(--primary-ochre);
     transition: width 0.3s ease;
     border-radius: 2px;
   }
 
   .nav-link-custom:hover {
-    color: #AEA04B;
+    color: var(--primary-ochre);
   }
 
   .nav-link-custom:hover::after {
     width: 100%;
+  }
+
+  /* --- Integrated Dropdown Styling --- */
+  .bmac-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--smooth-shadow);
+    overflow: hidden;
+    border: 1px solid rgba(174, 160, 75, 0.1);
+    z-index: 1000;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bmac-dropdown a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.98rem;
+    transition: all 0.2s ease;
+  }
+
+  .bmac-dropdown a:hover {
+    background: rgba(174, 160, 75, 0.08);
+    color: var(--primary-ochre);
+    padding-left: 28px;
+  }
+
+  .bmac-dropdown .amount {
+    font-weight: 700;
+    color: var(--primary-ochre);
+    font-size: 1.1rem;
+  }
+
+  .bmac-dropdown .custom-amount-link {
+    font-weight: 600;
+    color: var(--primary-ochre);
+    border-top: 1px solid #eee;
+    justify-content: center;
+  }
+
+  .bitcoin-link {
+    background-color: #f8f9fa;
+    font-size: 0.9rem !important;
   }
 </style>
